@@ -1,5 +1,5 @@
 [pr_description]
-publish_description_as_comment = true # do not append to user description
+publish_description_as_comment = true # do not append to user description; post as separate comment
 add_original_user_description = false # do not repeat user description in separate comment
 generate_ai_title = false # do not change the PR title
 
