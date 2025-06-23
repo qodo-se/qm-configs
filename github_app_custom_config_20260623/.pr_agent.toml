@@ -1,0 +1,23 @@
+[pr_description]
+publish_description_as_comment = true # do not append to user description
+add_original_user_description = false # do not repeat user description in separate comment
+generate_ai_title = false # do not change the PR title
+
+use_description_markers = false
+# Alternatively, using description markers allows the customer to insert the Qodo Merge description into a PR template
+# Documentation: https://qodo-merge-docs.qodo.ai/tools/describe/#markers-template
+# Example text for user to incorporate into PR description template:
+# ## PR Type:
+# pr_agent:type
+#
+# ## PR Description:
+# pr_agent:summary
+#
+# ## PR Walkthrough:
+# pr_agent:walkthrough
+
+[pr_reviewer]
+require_ticket_analysis_review = false # do not check if code changes satisfy ticket requirements
+
+[checks]
+enable_auto_checks_feedback = true # disable CI checks feedback
