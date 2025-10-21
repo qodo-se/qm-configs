@@ -1,0 +1,44 @@
+[config]
+disable_auto_feedback = false # set to true to disable automatic comments; tools can still be triggered via commands (e.g. /improve)
+
+
+[github_app]
+# [gitlab] # Uncomment this line if using GitLab instead of GitHub
+# [bitbucket_app] # Uncomment this line if using Bitbucket Cloud instead of GitHub
+# [bitbucket_server] # Uncomment this line if using Bitbucket Datacenter instead of GitHub
+pr_commands = [ # list of tools to trigger automatically when a new PR is created
+    "/describe",
+    "/compliance",
+    "/improve"
+]
+handle_push_trigger = true # updates feedback comments with every new commit
+push_commands = [ # list of tools to trigger upon each new commit; requires line above to be set to true
+    "/describe",
+    "/compliance",
+]
+feedback_on_draft_pr = false # for GitHub only; set to true to get automated feedback on draft PRs
+
+
+[pr_description] # /describe tool
+extra_instructions = ""
+enable_pr_diagram=true # set to false to disable diagram
+publish_description_as_comment=false # set to true to post description as separate comment
+
+
+[pr_code_suggestions] # /improve tool
+commitable_code_suggestions = false # set to true for inline code comments instead of table format
+num_code_suggestions_per_chunk=3 # max number of code suggestions given at one time; default is 3
+num_best_practice_suggestions=2 # max number of best practices suggestions given at one time; default is 2
+
+
+[pr_compliance] # /compliance tool
+enable_security_section = true
+enable_ticket_section = true
+enable_codebase_duplication_section = true
+enable_custom_compliance_section = true
+check_pr_additional_content = false  # will add a check to ticket compliance to ensure that the PR does not contain unrelated content
+
+
+[best_practices]
+content = ""
+organization_name = ""
