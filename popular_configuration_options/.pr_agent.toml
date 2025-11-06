@@ -1,6 +1,7 @@
 [config]
-disable_auto_feedback = false # set to true to disable automatic comments; tools can still be triggered via commands (e.g. /improve)
-
+disable_auto_feedback = false # set to true to disable automatic comments; when disabled, tools can still be manually triggered via commands (e.g. /improve)
+add_repo_metadata=true # if true, use metadata from files like 'AGENTS.MD', 'CLAUDE.MD', 'QODO.MD' etc.
+add_repo_metadata_file_list =["AGENTS.md", "CLAUDE.md"] # list of files to look for when adding repo metadata
 
 [github_app]
 # [gitlab] # Uncomment this line if using GitLab instead of GitHub
