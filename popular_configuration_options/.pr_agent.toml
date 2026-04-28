@@ -1,45 +1,47 @@
 [config]
-disable_auto_feedback = false # set to true to disable automatic comments; when disabled, tools can still be manually triggered via commands (e.g. /improve)
-add_repo_metadata=true # if true, use metadata from files like 'AGENTS.MD', 'CLAUDE.MD', 'QODO.MD' etc.
-add_repo_metadata_file_list =["AGENTS.md", "CLAUDE.md"] # list of files to look for when adding repo metadata
+disable_auto_feedback = false # set to true to disable automatic comments; when disabled, tools can still be manually triggered via commands (e.g. /agentic_review)
+add_repo_metadata = true # if true, use metadata from files like 'AGENTS.MD', 'CLAUDE.MD', etc.
+add_repo_metadata_file_list = ["AGENTS.md", "CLAUDE.md"] # list of files to look for when adding repo metadata
 
-[github_app]
+[github_app] # Comment/remove this line if not using GitHub; use alternate git provider below
 # [gitlab] # Uncomment this line if using GitLab instead of GitHub
 # [bitbucket_app] # Uncomment this line if using Bitbucket Cloud instead of GitHub
 # [bitbucket_server] # Uncomment this line if using Bitbucket Datacenter instead of GitHub
 pr_commands = [ # list of tools to trigger automatically when a new PR is created
-    "/describe",
-    "/compliance",
-    "/improve"
+    "/agentic_describe",
+    "/agentic_review"
 ]
-handle_push_trigger = true # updates feedback comments with every new commit
+handle_push_trigger = false # updates Qodo comments with every new commit
 push_commands = [ # list of tools to trigger upon each new commit; requires line above to be set to true
-    "/describe",
-    "/compliance",
+    "/agentic_describe",
+    "/agentic_review",
 ]
-feedback_on_draft_pr = false # for GitHub only; set to true to get automated feedback on draft PRs
+feedback_on_draft_pr = true # for GitHub only; set to true to get automated feedback on draft PRs
 
+[review_agent] # /agentic_review configuration
 
-[pr_description] # /describe tool
+# "summary" = only one not inline comment
+# "inline" = only inline comments
+# "both" [DEFAULT] = inline comments + summary comment
+comments_location_policy = "both"
+
+# severity threshold rank for inline comments: 
+# 3 [DEFAULT] = only action required as inline comments
+# 2 = only action required + remediation recommended 
+# 1 = all suggestions posted as inline comments
+# Only findings with rank >= threshold will be published inline
+inline_comments_severity_threshold = 3
+
+# Extra prompt to be added as instruction for the agent, for outlier scenarios
+issues_extra_instructions = ""
+compliance_extra_instructions = ""
+
+# Self-review checkbox
+demand_self_review = false  # add a checkbox for the author to self-review the code review findings
+self_review_text = "**Author self-review**: I have reviewed the code review findings, and addressed the relevant ones."
+approve_pr_on_self_review = false  # If true, the PR will be auto-approved after the author clicks on the self-review checkbox
+
+[pr_description] # /agentic_describe configuration
+
 extra_instructions = ""
-enable_pr_diagram=true # set to false to disable diagram
-publish_description_as_comment=false # set to true to post description as separate comment
-
-
-[pr_code_suggestions] # /improve tool
-commitable_code_suggestions = false # set to true for inline code comments instead of table format
-num_code_suggestions_per_chunk=3 # max number of code suggestions given at one time; default is 3
-num_best_practice_suggestions=2 # max number of best practices suggestions given at one time; default is 2
-
-
-[pr_compliance] # /compliance tool
-enable_security_section = true
-enable_ticket_section = true
-enable_codebase_duplication_section = true
-enable_custom_compliance_section = true
-check_pr_additional_content = false  # will add a check to ticket compliance to ensure that the PR does not contain unrelated content
-
-
-[best_practices]
-content = ""
-organization_name = ""
+enable_pr_diagram = true # set to false to disable mermaid diagram
