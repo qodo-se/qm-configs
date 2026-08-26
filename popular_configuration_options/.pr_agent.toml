@@ -33,8 +33,8 @@ comments_location_policy = "both"
 inline_comments_severity_threshold = 3
 
 # Extra prompt to be added as instruction for the agent, for outlier scenarios
-issues_extra_instructions = ""
-compliance_extra_instructions = ""
+issues_user_guidelines = ""
+compliance_user_guidelines = ""
 
 # Self-review checkbox
 demand_self_review = false  # add a checkbox for the author to self-review the code review findings
